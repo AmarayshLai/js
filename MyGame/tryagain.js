@@ -6,7 +6,7 @@ class tryagain extends Phaser.Scene {
     }
 
     preload() {
-      this.load.image('tryagain', 'assets/Welcome.png')
+      this.load.image('tryagain', 'assets/TryAgain.png')
   
   }
   

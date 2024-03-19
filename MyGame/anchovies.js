@@ -1,11 +1,11 @@
-class egg extends Phaser.Scene {
+class anchovies extends Phaser.Scene {
     constructor() {
-      super({ key: "egg" });
+      super({ key: "anchovies" });
     }
   
     preload() {
       // Step 1, load JSON
-      this.load.tilemapTiledJSON("egg", "assets/eggMap.tmj");
+      this.load.tilemapTiledJSON("anchovies", "assets/anchoviesMap.tmj");
       // this.load.tilemapTiledJSON("world","assets/farmMap.tmj")
   
       // Step 2 : Preload any images here
@@ -29,6 +29,11 @@ class egg extends Phaser.Scene {
         frameHeight: 62,
       });
 
+      this.load.spritesheet("potato", "assets/Potato.png", {
+        frameWidth: 62,
+        frameHeight: 62,
+      });
+
       this.load.spritesheet("carrot", "assets/Carrot.png", {
         frameWidth: 62,
         frameHeight: 62,
@@ -44,31 +49,37 @@ class egg extends Phaser.Scene {
         frameHeight: 62,
       });
 
-      this.load.spritesheet("potato", "assets/Potato.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
       this.load.spritesheet("ikan", "assets/Ikan.png", {
         frameWidth: 62,
         frameHeight: 62,
       });
 
-      
+      this.load.spritesheet("fish", "assets/Fish.png", {
+        frameWidth: 62,
+        frameHeight: 62,
+      });
+
     } // end of preload //
   
     create() {
-      console.log("egg");
+      console.log("anchovies");
   
-    //   this.anims.create({
-    //     key: "spinfire",
-    //     frames: this.anims.generateFrameNumbers("fire", { start: 0, end: 5 }),
-    //     frameRate: 10,
-    //     repeat: -1,
-    //   });
-  
+      this.anims.create({
+        key: "ikanAnim",
+        frames: this.anims.generateFrameNumbers("ikan", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
+
+      this.anims.create({
+        key: "fishAnim",
+        frames: this.anims.generateFrameNumbers("fish", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
+
       //Step 3 - Create the map from main
-      let map = this.make.tilemap({ key: "egg" });
+      let map = this.make.tilemap({ key: "anchovies" });
   
       // Step 4 Load the game tiles
       // 1st parameter is name in Tiled,
@@ -96,6 +107,13 @@ class egg extends Phaser.Scene {
       this.objectLayer = map.createLayer("objectLayer", tilesArray, 0, 0);
   
       this.anims.create({
+        key: "gen-down",
+        frames: this.anims.generateFrameNumbers("gen", { start: 131, end: 138 }),
+        frameRate: 5,
+        repeat: -1,
+      });
+      
+      this.anims.create({
         key: "gen-up",
         frames: this.anims.generateFrameNumbers("gen", { start: 105, end: 112 }),
         frameRate: 5,
@@ -108,14 +126,7 @@ class egg extends Phaser.Scene {
         frameRate: 5,
         repeat: -1,
       });
-  
-      this.anims.create({
-        key: "gen-down",
-        frames: this.anims.generateFrameNumbers("gen", { start: 131, end: 138 }),
-        frameRate: 5,
-        repeat: -1,
-      });
-  
+
       this.anims.create({
         key: "gen-right",
         frames: this.anims.generateFrameNumbers("gen", { start: 144, end: 151 }),
@@ -124,10 +135,64 @@ class egg extends Phaser.Scene {
       });
   
       var start = map.findObject("objectLayer", (obj) => obj.name === "start");
-  
+     
+
       this.player = this.physics.add.sprite(start.x, start.y, "gen");
       window.player = this.player;
   
+      var ikan1 = map.findObject("objectLayer", (obj) => obj.name === "ikan1")
+      var ikan2 = map.findObject("objectLayer", (obj) => obj.name === "ikan2")
+      var ikan3 = map.findObject("objectLayer", (obj) => obj.name === "ikan3")
+      var ikan4 = map.findObject("objectLayer", (obj) => obj.name === "ikan4")
+      var ikan5 = map.findObject("objectLayer", (obj) => obj.name === "ikan5")
+
+      var fish1 = map.findObject("objectLayer", (obj) => obj.name === "fish1")
+      var fish2 = map.findObject("objectLayer", (obj) => obj.name === "fish2")
+      var fish3 = map.findObject("objectLayer", (obj) => obj.name === "fish3")
+      var fish4 = map.findObject("objectLayer", (obj) => obj.name === "fish4")
+      var fish5 = map.findObject("objectLayer", (obj) => obj.name === "fish5")
+
+      this.enemy1 = this.physics.add
+      .sprite(ikan1.x,ikan1.y, "ikan")
+      .play("ikanAnim");
+
+      this.enemy2 = this.physics.add
+      .sprite(ikan2.x,ikan2.y, "ikan")
+      .play("ikanAnim");
+
+      this.enemy3 = this.physics.add
+      .sprite(ikan3.x,ikan3.y, "ikan")
+      .play("ikanAnim");
+
+      this.enemy4 = this.physics.add
+      .sprite(ikan4.x,ikan4.y, "ikan")
+      .play("ikanAnim");
+
+      this.enemy5 = this.physics.add
+      .sprite(ikan5.x,ikan5.y, "ikan")
+      .play("ikanAnim");
+
+      this.collect1 = this.physics.add
+      .sprite(fish1.x,fish1.y, "fish")
+      .play("fishAnim").setScale(0.5);
+
+      this.collect2 = this.physics.add
+      .sprite(fish2.x,fish2.y, "fish")
+      .play("fishAnim").setScale(0.5);
+
+      this.collect3 = this.physics.add
+      .sprite(fish3.x,fish3.y, "fish")
+      .play("fishAnim").setScale(0.5);
+
+      this.collect4 = this.physics.add
+      .sprite(fish4.x,fish4.y, "fish")
+      .play("fishAnim").setScale(0.5);
+
+      this.collect5 = this.physics.add
+      .sprite(fish5.x,fish5.y, "fish")
+      .play("fishAnim").setScale(0.5);
+
+
 //       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
 //       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
   
@@ -172,11 +237,11 @@ class egg extends Phaser.Scene {
 //       repeat: -1
 //   })
   
-      this.kitchenLayer.setCollisionByExclusion(-1, true);
-      this.physics.add.collider(this.player, this.kitchenLayer);
+      // this.kitchenLayer.setCollisionByExclusion(-1, true);
+      // this.physics.add.collider(this.player, this.kitchenLayer);
   
-      this.equipmentLayer.setCollisionByExclusion(-1, true);
-      this.physics.add.collider(this.player, this.equipmentLayer);
+      // this.equipmentLayer.setCollisionByExclusion(-1, true);
+      // this.physics.add.collider(this.player, this.equipmentLayer);
   
       this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6);
   
@@ -258,9 +323,10 @@ class egg extends Phaser.Scene {
         this.player.anims.stop();
       }
   
-      if (this.player.x > 362 && 
-        this.player.x < 434 && 
-        this.player.y > 493) {
+      if (this.player.x > 0 && 
+        this.player.x < 35 && 
+        this.player.y > 0 &&
+        this.player.y < 35) {
         console.log("villagedoor");
         this.village();
       }

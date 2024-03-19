@@ -140,11 +140,11 @@ class kitchen extends Phaser.Scene {
 //       repeat: -1
 //   })
   
-//       this.kitchenLayer.setCollisionByExclusion(-1, true);
-//       this.physics.add.collider(this.player, this.kitchenLayer);
+      this.kitchenLayer.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.player, this.kitchenLayer);
   
-//       this.equipmentLayer.setCollisionByExclusion(-1, true);
-//       this.physics.add.collider(this.player, this.equipmentLayer);
+      this.equipmentLayer.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.player, this.equipmentLayer);
   
       this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6);
   
@@ -228,7 +228,7 @@ class kitchen extends Phaser.Scene {
   
       if (this.player.x > 362 && 
         this.player.x < 434 && 
-        this.player.y > 538) {
+        this.player.y > 493) {
         console.log("villagedoor");
         this.village();
       }

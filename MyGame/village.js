@@ -25,32 +25,32 @@ class village extends Phaser.Scene {
       });
 
       this.load.spritesheet("egg", "assets/Egg.png", {
-        frameWidth: 124,
+        frameWidth: 62,
         frameHeight: 62,
       });
 
       this.load.spritesheet("carrot", "assets/Carrot.png", {
-        frameWidth: 124,
+        frameWidth: 62,
         frameHeight: 62,
       });
 
       this.load.spritesheet("cucumber", "assets/Cucumber.png", {
-        frameWidth: 124,
+        frameWidth: 62,
         frameHeight: 62,
       });
 
       this.load.spritesheet("fish", "assets/Fish.png", {
-        frameWidth: 124,
+        frameWidth: 62,
         frameHeight: 62,
       });
 
       this.load.spritesheet("potato", "assets/Potato.png", {
-        frameWidth: 124,
+        frameWidth: 62,
         frameHeight: 62,
       });
 
       this.load.spritesheet("ikan", "assets/Ikan.png", {
-        frameWidth: 124,
+        frameWidth: 62,
         frameHeight: 62,
       });
 
@@ -131,6 +131,11 @@ class village extends Phaser.Scene {
       window.player = this.player;
       this.cameras.main.startFollow(this.player)
   
+
+    //   this.physics.world.bound.width=this.floorLayer.width
+    //   this.physics.world.bound.height=this.floorLayer.height
+    //   this.player.setCollideWorldBounds(true);
+
 //       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
 //       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
   
@@ -266,10 +271,32 @@ class village extends Phaser.Scene {
   
       if (this.player.x > 303 && 
         this.player.x < 330 && 
-        this.player.y < 915.3) {
+        this.player.y < 915.3 &&
+        this.player.y > 640 ) {
         console.log("kitchenDoor");
         this.kitchen();
       }
+
+      if (this.player.x > 940 && 
+        this.player.x < 1012 && 
+        this.player.y > 663) {
+        console.log("anchoviesDoor");
+        this.anchovies();
+      }
+
+    //   if (this.player.x > 517 && 
+    //     this.player.x < 527 && 
+    //     this.player.y < 595) {
+    //     console.log("cucumberDoor");
+    //     this.anchovies();
+    //   }
+
+    //   if (this.player.x > 943 && 
+    //     this.player.x < 1011 && 
+    //     this.player.y > 663) {
+    //     console.log("eggDoor");
+    //     this.anchovies();
+    //   }
     } // end of update //
   
     // hitFire(player, item) {
@@ -283,5 +310,20 @@ class village extends Phaser.Scene {
       console.log("kitchen function");
       this.scene.start("kitchen");
     }
+
+    anchovies(player, tile) {
+        console.log("anchovies function");
+        this.scene.start("anchovies");
+      }
+
+      egg(player, tile) {
+        console.log("anchovies function");
+        this.scene.start("egg");
+      }
+
+      cucumber(player, tile) {
+        console.log("anchovies function");
+        this.scene.start("cucumber");
+      }
   }
   
