@@ -9,7 +9,7 @@ let config = {
             debug: true
         }
     },
-    backgroundColor: '#000000',
+    backgroundColor: '#052b1d',
     scene: [ m1, m2, m3, m4, village, kitchen, cucumber, egg, anchovies, level1, level2, preloadScene, tryagain, congrats ]
 
 };
