@@ -24,11 +24,6 @@ class cucumber extends Phaser.Scene {
         frameHeight: 64,
       });
 
-      this.load.spritesheet("egg", "assets/Egg.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
       this.load.spritesheet("carrot", "assets/Carrot.png", {
         frameWidth: 62,
         frameHeight: 62,
@@ -39,27 +34,25 @@ class cucumber extends Phaser.Scene {
         frameHeight: 62,
       });
 
-      this.load.spritesheet("fish", "assets/Fish.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("potato", "assets/Potato.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("ikan", "assets/Ikan.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
 
     } // end of preload //
   
     create() {
       console.log("cucumber");
   
+      this.anims.create({
+        key: "cucumberAnim",
+        frames: this.anims.generateFrameNumbers("cucumber", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
+
+      this.anims.create({
+        key: "carrotAnim",
+        frames: this.anims.generateFrameNumbers("carrot", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
     //   this.anims.create({
     //     key: "spinfire",
     //     frames: this.anims.generateFrameNumbers("fire", { start: 0, end: 5 }),
@@ -68,7 +61,7 @@ class cucumber extends Phaser.Scene {
     //   });
   
       //Step 3 - Create the map from main
-      let map = this.make.tilemap({ key: "kitchen" });
+      let map = this.make.tilemap({ key: "cucumber" });
   
       // Step 4 Load the game tiles
       // 1st parameter is name in Tiled,
@@ -128,6 +121,59 @@ class cucumber extends Phaser.Scene {
       this.player = this.physics.add.sprite(start.x, start.y, "gen");
       window.player = this.player;
   
+      var cucumber1 = map.findObject("objectLayer", (obj) => obj.name === "cucumber1")
+      var cucumber2 = map.findObject("objectLayer", (obj) => obj.name === "cucumber2")
+      var cucumber3 = map.findObject("objectLayer", (obj) => obj.name === "cucumber3")
+      var cucumber4 = map.findObject("objectLayer", (obj) => obj.name === "cucumber4")
+      var cucumber5 = map.findObject("objectLayer", (obj) => obj.name === "cucumber5")
+
+      var carrot1 = map.findObject("objectLayer", (obj) => obj.name === "carrot1")
+      var carrot2 = map.findObject("objectLayer", (obj) => obj.name === "carrot2")
+      var carrot3 = map.findObject("objectLayer", (obj) => obj.name === "carrot3")
+      var carrot4 = map.findObject("objectLayer", (obj) => obj.name === "carrot4")
+      var carrot5 = map.findObject("objectLayer", (obj) => obj.name === "carrot5")
+
+      this.collect1 = this.physics.add
+      .sprite(cucumber1.x,cucumber1.y, "cucumber")
+      .play("cucumberAnim").setScale(0.5);
+
+      this.collect2 = this.physics.add
+      .sprite(cucumber2.x,cucumber2.y, "cucumber")
+      .play("cucumberAnim").setScale(0.5);
+
+      this.collect3 = this.physics.add
+      .sprite(cucumber3.x,cucumber3.y, "cucumber")
+      .play("cucumberAnim").setScale(0.5);
+
+      this.collect4 = this.physics.add
+      .sprite(cucumber4.x,cucumber4.y, "cucumber")
+      .play("cucumberAnim").setScale(0.5);
+
+      this.collect5 = this.physics.add
+      .sprite(cucumber5.x,cucumber5.y, "cucumber")
+      .play("cucumberAnim").setScale(0.5);
+
+      this.enemy1 = this.physics.add
+      .sprite(carrot1.x,carrot1.y, "carrot")
+      .play("carrotAnim").setScale(0.5);
+
+      this.enemy2 = this.physics.add
+      .sprite(carrot2.x,carrot2.y, "carrot")
+      .play("carrotAnim").setScale(0.5);
+
+      this.enemy3 = this.physics.add
+      .sprite(carrot3.x,carrot3.y, "carrot")
+      .play("carrotAnim").setScale(0.5);
+
+      this.enemy4 = this.physics.add
+      .sprite(carrot4.x,carrot4.y, "carrot")
+      .play("carrotAnim").setScale(0.5);
+
+      this.enemy5 = this.physics.add
+      .sprite(carrot5.x,carrot5.y, "carrot")
+      .play("carrotAnim").setScale(0.5);
+
+
 //       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
 //       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
   
@@ -258,9 +304,9 @@ class cucumber extends Phaser.Scene {
         this.player.anims.stop();
       }
   
-      if (this.player.x > 362 && 
-        this.player.x < 434 && 
-        this.player.y > 493) {
+      if (this.player.x > 532 && 
+        this.player.x < 620 && 
+        this.player.y > 586) {
         console.log("villagedoor");
         this.village();
       }

@@ -24,37 +24,12 @@ class anchovies extends Phaser.Scene {
         frameHeight: 64,
       });
 
-      this.load.spritesheet("egg", "assets/Egg.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("potato", "assets/Potato.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("carrot", "assets/Carrot.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("cucumber", "assets/Cucumber.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
       this.load.spritesheet("fish", "assets/Fish.png", {
         frameWidth: 62,
         frameHeight: 62,
       });
 
       this.load.spritesheet("ikan", "assets/Ikan.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("fish", "assets/Fish.png", {
         frameWidth: 62,
         frameHeight: 62,
       });
@@ -152,43 +127,43 @@ class anchovies extends Phaser.Scene {
       var fish4 = map.findObject("objectLayer", (obj) => obj.name === "fish4")
       var fish5 = map.findObject("objectLayer", (obj) => obj.name === "fish5")
 
-      this.enemy1 = this.physics.add
+      this.collect1 = this.physics.add
       .sprite(ikan1.x,ikan1.y, "ikan")
       .play("ikanAnim");
 
-      this.enemy2 = this.physics.add
+      this.collect2 = this.physics.add
       .sprite(ikan2.x,ikan2.y, "ikan")
       .play("ikanAnim");
 
-      this.enemy3 = this.physics.add
+      this.collect3 = this.physics.add
       .sprite(ikan3.x,ikan3.y, "ikan")
       .play("ikanAnim");
 
-      this.enemy4 = this.physics.add
+      this.collect4 = this.physics.add
       .sprite(ikan4.x,ikan4.y, "ikan")
       .play("ikanAnim");
 
-      this.enemy5 = this.physics.add
+      this.collect5 = this.physics.add
       .sprite(ikan5.x,ikan5.y, "ikan")
       .play("ikanAnim");
 
-      this.collect1 = this.physics.add
+      this.enemy1 = this.physics.add
       .sprite(fish1.x,fish1.y, "fish")
       .play("fishAnim").setScale(0.5);
 
-      this.collect2 = this.physics.add
+      this.enemy2 = this.physics.add
       .sprite(fish2.x,fish2.y, "fish")
       .play("fishAnim").setScale(0.5);
 
-      this.collect3 = this.physics.add
+      this.enemy3 = this.physics.add
       .sprite(fish3.x,fish3.y, "fish")
       .play("fishAnim").setScale(0.5);
 
-      this.collect4 = this.physics.add
+      this.enemy4 = this.physics.add
       .sprite(fish4.x,fish4.y, "fish")
       .play("fishAnim").setScale(0.5);
 
-      this.collect5 = this.physics.add
+      this.enemy5 = this.physics.add
       .sprite(fish5.x,fish5.y, "fish")
       .play("fishAnim").setScale(0.5);
 
@@ -323,10 +298,9 @@ class anchovies extends Phaser.Scene {
         this.player.anims.stop();
       }
   
-      if (this.player.x > 0 && 
-        this.player.x < 35 && 
-        this.player.y > 0 &&
-        this.player.y < 35) {
+      if (this.player.x > 80 && 
+        this.player.x < 150 && 
+        this.player.y < 3.6) {
         console.log("villagedoor");
         this.village();
       }

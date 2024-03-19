@@ -29,32 +29,12 @@ class egg extends Phaser.Scene {
         frameHeight: 62,
       });
 
-      this.load.spritesheet("carrot", "assets/Carrot.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("cucumber", "assets/Cucumber.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("fish", "assets/Fish.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
-
       this.load.spritesheet("potato", "assets/Potato.png", {
         frameWidth: 62,
         frameHeight: 62,
       });
 
-      this.load.spritesheet("ikan", "assets/Ikan.png", {
-        frameWidth: 62,
-        frameHeight: 62,
-      });
 
-      
     } // end of preload //
   
     create() {
@@ -66,7 +46,19 @@ class egg extends Phaser.Scene {
     //     frameRate: 10,
     //     repeat: -1,
     //   });
-  
+    this.anims.create({
+        key: "eggAnim",
+        frames: this.anims.generateFrameNumbers("egg", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
+
+      this.anims.create({
+        key: "potatoAnim",
+        frames: this.anims.generateFrameNumbers("potato", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
       //Step 3 - Create the map from main
       let map = this.make.tilemap({ key: "egg" });
   
@@ -127,7 +119,61 @@ class egg extends Phaser.Scene {
   
       this.player = this.physics.add.sprite(start.x, start.y, "gen");
       window.player = this.player;
+      
+      this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6);
   
+      var potato1 = map.findObject("objectLayer", (obj) => obj.name === "potato1")
+      var potato2 = map.findObject("objectLayer", (obj) => obj.name === "potato2")
+      var potato3 = map.findObject("objectLayer", (obj) => obj.name === "potato3")
+      var potato4 = map.findObject("objectLayer", (obj) => obj.name === "potato4")
+      var potato5 = map.findObject("objectLayer", (obj) => obj.name === "potato5")
+
+      var egg1 = map.findObject("objectLayer", (obj) => obj.name === "egg1")
+      var egg2 = map.findObject("objectLayer", (obj) => obj.name === "egg2")
+      var egg3 = map.findObject("objectLayer", (obj) => obj.name === "egg3")
+      var egg4 = map.findObject("objectLayer", (obj) => obj.name === "egg4")
+      var egg5 = map.findObject("objectLayer", (obj) => obj.name === "egg5")
+
+      this.enemy1 = this.physics.add
+      .sprite(potato1.x,potato1.y, "potato")
+      .play("potatoAnim").setScale(0.5);
+
+      this.enemy2 = this.physics.add
+      .sprite(potato2.x,potato2.y, "potato")
+      .play("potatoAnim").setScale(0.5);
+
+      this.enemy3 = this.physics.add
+      .sprite(potato3.x,potato3.y, "potato")
+      .play("potatoAnim").setScale(0.5);
+
+      this.enemy4 = this.physics.add
+      .sprite(potato4.x,potato4.y, "potato")
+      .play("potatoAnim").setScale(0.5);
+
+      this.enemy5 = this.physics.add
+      .sprite(potato5.x,potato5.y, "potato")
+      .play("potatoAnim").setScale(0.5);
+
+      this.collect1 = this.physics.add
+      .sprite(egg1.x,egg1.y, "egg")
+      .play("eggAnim").setScale(0.5);
+
+      this.collect2 = this.physics.add
+      .sprite(egg2.x,egg2.y, "egg")
+      .play("eggAnim").setScale(0.5);
+
+      this.collect3 = this.physics.add
+      .sprite(egg3.x,egg3.y, "egg")
+      .play("eggAnim").setScale(0.5);
+
+      this.collect4 = this.physics.add
+      .sprite(egg4.x,egg4.y, "egg")
+      .play("eggAnim").setScale(0.5);
+
+      this.collect5 = this.physics.add
+      .sprite(egg5.x,egg5.y, "egg")
+      .play("eggAnim").setScale(0.5);
+
 //       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
 //       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
   
@@ -172,13 +218,13 @@ class egg extends Phaser.Scene {
 //       repeat: -1
 //   })
   
-      this.kitchenLayer.setCollisionByExclusion(-1, true);
-      this.physics.add.collider(this.player, this.kitchenLayer);
+    //   this.kitchenLayer.setCollisionByExclusion(-1, true);
+    //   this.physics.add.collider(this.player, this.kitchenLayer);
   
-      this.equipmentLayer.setCollisionByExclusion(-1, true);
-      this.physics.add.collider(this.player, this.equipmentLayer);
+    //   this.equipmentLayer.setCollisionByExclusion(-1, true);
+    //   this.physics.add.collider(this.player, this.equipmentLayer);
   
-      this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6);
+      
   
       // create the arrow keys
       this.cursors = this.input.keyboard.createCursorKeys();
@@ -258,9 +304,9 @@ class egg extends Phaser.Scene {
         this.player.anims.stop();
       }
   
-      if (this.player.x > 362 && 
-        this.player.x < 434 && 
-        this.player.y > 493) {
+      if (this.player.x > 72 && 
+        this.player.x < 136 && 
+        this.player.y > 595) {
         console.log("villagedoor");
         this.village();
       }

@@ -61,6 +61,28 @@ class village extends Phaser.Scene {
     create() {
       console.log("village");
   
+      this.anims.create({
+        key: "cucumberAnim",
+        frames: this.anims.generateFrameNumbers("cucumber", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
+
+
+      this.anims.create({
+        key: "ikanAnim",
+        frames: this.anims.generateFrameNumbers("ikan", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
+
+      this.anims.create({
+        key: "eggAnim",
+        frames: this.anims.generateFrameNumbers("egg", { start: 0, end: 1 }),
+        frameRate: 5,
+        repeat: -1,
+      });
+
     //   this.anims.create({
     //     key: "spinfire",
     //     frames: this.anims.generateFrameNumbers("fire", { start: 0, end: 5 }),
@@ -188,6 +210,52 @@ class village extends Phaser.Scene {
   
       this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6);
       
+      var ikan1 = map.findObject("objectLayer", (obj) => obj.name === "ikan1")
+      var ikan2 = map.findObject("objectLayer", (obj) => obj.name === "ikan2")
+      var ikan3 = map.findObject("objectLayer", (obj) => obj.name === "ikan3")
+      var cucumber1 = map.findObject("objectLayer", (obj) => obj.name === "cucumber1")
+      var cucumber2 = map.findObject("objectLayer", (obj) => obj.name === "cucumber2")
+      var cucumber3 = map.findObject("objectLayer", (obj) => obj.name === "cucumber3")
+      var egg1 = map.findObject("objectLayer", (obj) => obj.name === "egg1")
+      var egg2 = map.findObject("objectLayer", (obj) => obj.name === "egg2")
+      var egg3 = map.findObject("objectLayer", (obj) => obj.name === "egg3")
+
+      this.collect1 = this.physics.add
+      .sprite(egg1.x,egg1.y, "egg")
+      .play("eggAnim").setScale(0.5);
+
+      this.collect2 = this.physics.add
+      .sprite(egg2.x,egg2.y, "egg")
+      .play("eggAnim").setScale(0.5);
+
+      this.collect3 = this.physics.add
+      .sprite(egg3.x,egg3.y, "egg")
+      .play("eggAnim").setScale(0.5);
+
+      this.collect4 = this.physics.add
+      .sprite(cucumber1.x,cucumber1.y, "cucumber")
+      .play("cucumberAnim").setScale(0.7);
+
+      this.collect5 = this.physics.add
+      .sprite(cucumber2.x,cucumber2.y, "cucumber")
+      .play("cucumberAnim").setScale(0.7);
+
+      this.collect6 = this.physics.add
+      .sprite(cucumber3.x,cucumber3.y, "cucumber")
+      .play("cucumberAnim").setScale(0.7);
+
+      this.collect7 = this.physics.add
+      .sprite(ikan1.x,ikan1.y, "ikan")
+      .play("ikanAnim");
+
+      this.collect8 = this.physics.add
+      .sprite(ikan2.x,ikan2.y, "ikan")
+      .play("ikanAnim");
+
+      this.collect9 = this.physics.add
+      .sprite(ikan3.x,ikan3.y, "ikan")
+      .play("ikanAnim");
+
   
       // create the arrow keys
       this.cursors = this.input.keyboard.createCursorKeys();
@@ -284,19 +352,19 @@ class village extends Phaser.Scene {
         this.anchovies();
       }
 
-    //   if (this.player.x > 517 && 
-    //     this.player.x < 527 && 
-    //     this.player.y < 595) {
-    //     console.log("cucumberDoor");
-    //     this.anchovies();
-    //   }
+      if (this.player.x > 524 && 
+        this.player.x < 596 && 
+        this.player.y < 517) {
+        console.log("cucumberDoor");
+        this.cucumber();
+      }
 
-    //   if (this.player.x > 943 && 
-    //     this.player.x < 1011 && 
-    //     this.player.y > 663) {
-    //     console.log("eggDoor");
-    //     this.anchovies();
-    //   }
+      if (this.player.x > 723 && 
+        this.player.x < 814 && 
+        this.player.y < 532) {
+        console.log("eggDoor");
+        this.egg();
+      }
     } // end of update //
   
     // hitFire(player, item) {
@@ -317,12 +385,12 @@ class village extends Phaser.Scene {
       }
 
       egg(player, tile) {
-        console.log("anchovies function");
+        console.log("egg function");
         this.scene.start("egg");
       }
 
       cucumber(player, tile) {
-        console.log("anchovies function");
+        console.log("cucumber function");
         this.scene.start("cucumber");
       }
   }
