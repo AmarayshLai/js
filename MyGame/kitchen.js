@@ -1,11 +1,11 @@
-class village extends Phaser.Scene {
+class kitchen extends Phaser.Scene {
     constructor() {
-      super({ key: "village" });
+      super({ key: "kitchen" });
     }
   
     preload() {
       // Step 1, load JSON
-      this.load.tilemapTiledJSON("village", "assets/villageMap.tmj");
+      this.load.tilemapTiledJSON("kitchen", "assets/kitchenMapNew.tmj");
       // this.load.tilemapTiledJSON("world","assets/farmMap.tmj")
   
       // Step 2 : Preload any images here
@@ -23,43 +23,10 @@ class village extends Phaser.Scene {
         frameWidth: 64,
         frameHeight: 64,
       });
-
-      this.load.spritesheet("egg", "assets/Egg.png", {
-        frameWidth: 124,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("carrot", "assets/Carrot.png", {
-        frameWidth: 124,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("cucumber", "assets/Cucumber.png", {
-        frameWidth: 124,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("fish", "assets/Fish.png", {
-        frameWidth: 124,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("potato", "assets/Potato.png", {
-        frameWidth: 124,
-        frameHeight: 62,
-      });
-
-      this.load.spritesheet("ikan", "assets/Ikan.png", {
-        frameWidth: 124,
-        frameHeight: 62,
-      });
-
-
-
     } // end of preload //
   
     create() {
-      console.log("village");
+      console.log("kitchen");
   
     //   this.anims.create({
     //     key: "spinfire",
@@ -69,7 +36,7 @@ class village extends Phaser.Scene {
     //   });
   
       //Step 3 - Create the map from main
-      let map = this.make.tilemap({ key: "village" });
+      let map = this.make.tilemap({ key: "kitchen" });
   
       // Step 4 Load the game tiles
       // 1st parameter is name in Tiled,
@@ -92,8 +59,8 @@ class village extends Phaser.Scene {
       // Step 6  Load in layers by layers
       this.baseLayer = map.createLayer("baseLayer", tilesArray, 0, 0);
       this.floorLayer = map.createLayer("floorLayer", tilesArray, 0, 0);
-      this.buildingsLayer = map.createLayer("buildingsLayer", tilesArray, 0, 0);
-      this.othersLayer = map.createLayer("othersLayer", tilesArray, 0, 0);
+      this.kitchenLayer = map.createLayer("kitchenLayer", tilesArray, 0, 0);
+      this.equipmentLayer = map.createLayer("equipmentLayer", tilesArray, 0, 0);
       this.objectLayer = map.createLayer("objectLayer", tilesArray, 0, 0);
   
       this.anims.create({
@@ -127,9 +94,7 @@ class village extends Phaser.Scene {
       var start = map.findObject("objectLayer", (obj) => obj.name === "start");
   
       this.player = this.physics.add.sprite(start.x, start.y, "gen");
-      
       window.player = this.player;
-      this.cameras.main.startFollow(this.player)
   
 //       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
 //       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
@@ -175,14 +140,13 @@ class village extends Phaser.Scene {
 //       repeat: -1
 //   })
   
-      this.buildingsLayer.setCollisionByExclusion(-1, true);
-      this.physics.add.collider(this.player, this.buildingsLayer);
+//       this.kitchenLayer.setCollisionByExclusion(-1, true);
+//       this.physics.add.collider(this.player, this.kitchenLayer);
   
-      this.othersLayer.setCollisionByExclusion(-1, true);
-      this.physics.add.collider(this.player, this.othersLayer);
+//       this.equipmentLayer.setCollisionByExclusion(-1, true);
+//       this.physics.add.collider(this.player, this.equipmentLayer);
   
       this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6);
-      
   
       // create the arrow keys
       this.cursors = this.input.keyboard.createCursorKeys();
@@ -242,8 +206,6 @@ class village extends Phaser.Scene {
         },
         this
       );
-
-  
     } // end of create //
   
     update() {
@@ -264,11 +226,11 @@ class village extends Phaser.Scene {
         this.player.anims.stop();
       }
   
-      if (this.player.x > 303 && 
-        this.player.x < 330 && 
-        this.player.y < 915.3) {
-        console.log("kitchenDoor");
-        this.kitchen();
+      if (this.player.x > 362 && 
+        this.player.x < 434 && 
+        this.player.y > 538) {
+        console.log("villagedoor");
+        this.village();
       }
     } // end of update //
   
@@ -279,9 +241,12 @@ class village extends Phaser.Scene {
     //   return false;
     // }
   
-    kitchen(player, tile) {
-      console.log("kitchen function");
-      this.scene.start("kitchen");
+    village(player, tile) {
+      console.log("village function");
+      this.scene.start("village");
     }
+
+
+    
   }
   
