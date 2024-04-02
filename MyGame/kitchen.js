@@ -233,17 +233,17 @@ class kitchen extends Phaser.Scene {
         this.village();
       }
 
-      //winning scene
-      // if (this.player.x > 914 && this.player .x < 994 && this.player.y > 1079 && this.player.y < 1114) {
-      //   //console.log("home location")
-        console.log(window.cucumber, window.egg, window.ikan)
-      if (window.cucumber > 4, window.egg >4, window.ikan >4) {
-        console.log("jumping to winning scene")
-        this.scene.start("congrats")
-      } else {
-        this.scene.start("village")
+      // //winning scene
+      // // if (this.player.x > 914 && this.player .x < 994 && this.player.y > 1079 && this.player.y < 1114) {
+      // //   //console.log("home location")
+      //   console.log(window.cucumber, window.egg, window.ikan)
+      // if (window.cucumber > 4, window.egg >4, window.ikan >4) {
+      //   console.log("jumping to winning scene")
+      //   this.scene.start("congrats")
+      // } else {
+      //   this.scene.start("village")
 
-      }
+      // }
     
 
     } // end of update //
