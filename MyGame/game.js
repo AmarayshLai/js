@@ -14,7 +14,7 @@ let config = {
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
     backgroundColor: '#052b1d',
-    scene: [ m1, m2, m3, m4, village, kitchen, cucumber, egg, anchovies, preloadScene, tryagain, congrats ]
+    scene: [ m1, m2, m3, m4, village, villageEgg, villageIkan, villageKitchen, villageCucumber, kitchen, cucumber, egg, anchovies, preloadScene, tryagain, congrats ]
 
 };
 

@@ -1,6 +1,6 @@
-class village extends Phaser.Scene {
+class villageIkan extends Phaser.Scene {
   constructor() {
-    super({ key: "village" });
+    super({ key: "villageIkan" });
   }
 
   init(data) {
@@ -124,6 +124,13 @@ class village extends Phaser.Scene {
     this.objectLayer = map.createLayer("objectLayer", tilesArray, 0, 0);
 
     this.anims.create({
+      key: "gen-down",
+      frames: this.anims.generateFrameNumbers("gen", { start: 131, end: 138 }),
+      frameRate: 5,
+      repeat: -1,
+    });
+
+    this.anims.create({
       key: "gen-up",
       frames: this.anims.generateFrameNumbers("gen", { start: 105, end: 112 }),
       frameRate: 5,
@@ -138,13 +145,6 @@ class village extends Phaser.Scene {
     });
 
     this.anims.create({
-      key: "gen-down",
-      frames: this.anims.generateFrameNumbers("gen", { start: 131, end: 138 }),
-      frameRate: 5,
-      repeat: -1,
-    });
-
-    this.anims.create({
       key: "gen-right",
       frames: this.anims.generateFrameNumbers("gen", { start: 144, end: 151 }),
       frameRate: 5,
@@ -154,8 +154,8 @@ class village extends Phaser.Scene {
     var start = map.findObject("objectLayer", (obj) => obj.name === "start");
 
     // this.player = this.physics.add.sprite("gen");
-    // this.player = this.physics.add.sprite(637.8, 693.4, "gen");
-    this.player = this.physics.add.sprite(start.x, start.y, "gen");
+    this.player = this.physics.add.sprite(989.8, 644.8, "gen");
+    // this.player = this.physics.add.sprite(start.x, start.y, "gen");
 
     window.player = this.player;
     this.cameras.main.startFollow(this.player);

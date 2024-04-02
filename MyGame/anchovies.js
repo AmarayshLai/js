@@ -217,13 +217,37 @@ graphics.fillRectShape(rect).setScrollFactor(0)
 
 
 //stuff
-this.eggInv = this.add.image (400, 25, 'egg').setScrollFactor(0).setScale(0.4);
-this.cucumberInv = this.add.image (440, 25, 'cucumber').setScrollFactor(0).setScale(0.4);
-this.ikanInv = this.add.image (480, 25, 'ikan').setScrollFactor(0).setScale(0.4);
+this.eggInv = this.add
+.image(400, 25, "egg")
+.setScrollFactor(0)
+.setScale(0.4);
+this.cucumberInv = this.add
+.image(445, 25, "cucumber")
+.setScrollFactor(0)
+.setScale(0.4);
+this.ikanInv = this.add
+.image(490, 25, "ikan")
+.setScrollFactor(0)
+.setScale(0.4);
 
-this.eggNum = this.add.text(415, 20, window.egg, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
-this.cucumberNum = this.add.text(450, 20, window.cucumber, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
-this.ikanNum = this.add.text(485, 20, window.ikan, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
+this.eggNum = this.add
+.text(416, 15, window.egg, {
+  font: "15px Futura PT Medium",
+  fill: "#ffffff",
+})
+.setScrollFactor(0);
+this.cucumberNum = this.add
+.text(458, 15, window.cucumber, {
+  font: "15px Futura PT Medium",
+  fill: "#ffffff",
+})
+.setScrollFactor(0);
+this.ikanNum = this.add
+.text(510, 15, window.ikan, {
+  font: "15px Futura PT Medium",
+  fill: "#ffffff",
+})
+.setScrollFactor(0);
 
 
 //hearts
@@ -277,7 +301,7 @@ this.heart3.setVisible(false);
         this.player.x < 150 && 
         this.player.y < 3.6) {
         console.log("villagedoor");
-        this.village();
+        this.villageIkan();
       }
     } // end of update //
 
@@ -341,9 +365,9 @@ this.heart3.setVisible(false);
         this.eggNum.setText(window.egg);
       }
 
-    village(player, tile) {
+    villageIkan(player, tile) {
       console.log("village function");
-      this.scene.start("village");
+      this.scene.start("villageIkan");
     }
 
 

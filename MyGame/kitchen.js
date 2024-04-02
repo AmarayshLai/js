@@ -3,6 +3,11 @@ class kitchen extends Phaser.Scene {
       super({ key: "kitchen" });
     }
   
+    init(data) {
+      this.player = data.player;
+      this.inventory = data.inventory;
+    }
+
     preload() {
       // Step 1, load JSON
       this.load.tilemapTiledJSON("kitchen", "assets/kitchenMapNew.tmj");
@@ -91,7 +96,7 @@ class kitchen extends Phaser.Scene {
   
       this.collideLayer.setCollisionByExclusion(-1, true);
       this.physics.add.collider(this.player, this.collideLayer);
-      
+
       this.kitchenLayer.setCollisionByExclusion(-1, true);
       this.physics.add.collider(this.player, this.kitchenLayer);
   
@@ -103,7 +108,74 @@ class kitchen extends Phaser.Scene {
       // create the arrow keys
       this.cursors = this.input.keyboard.createCursorKeys();
   
+ //inventory bar
+var rect = new Phaser.Geom.Rectangle(255, 0, 300, 50);
+var graphics = this.add.graphics({ fillStyle: { color: '0x052b1d ' } });
+graphics.fillRectShape(rect).setScrollFactor(0)
 
+
+//stuff
+this.eggInv = this.add
+.image(400, 25, "egg")
+.setScrollFactor(0)
+.setScale(0.4);
+this.cucumberInv = this.add
+.image(445, 25, "cucumber")
+.setScrollFactor(0)
+.setScale(0.4);
+this.ikanInv = this.add
+.image(490, 25, "ikan")
+.setScrollFactor(0)
+.setScale(0.4);
+
+this.eggNum = this.add
+.text(416, 15, window.egg, {
+  font: "15px Futura PT Medium",
+  fill: "#ffffff",
+})
+.setScrollFactor(0);
+this.cucumberNum = this.add
+.text(458, 15, window.cucumber, {
+  font: "15px Futura PT Medium",
+  fill: "#ffffff",
+})
+.setScrollFactor(0);
+this.ikanNum = this.add
+.text(510, 15, window.ikan, {
+  font: "15px Futura PT Medium",
+  fill: "#ffffff",
+})
+.setScrollFactor(0);
+
+
+
+//hearts
+this.heart1 = this.add.image (300,25,'nasi').setScrollFactor(0).setScale(0.4)
+this.heart2 = this.add.image (330,25,'nasi').setScrollFactor(0).setScale(0.4)
+this.heart3 = this.add.image (360,25,'nasi').setScrollFactor(0).setScale(0.4)
+
+if (window.heart === 3) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(true);
+this.heart3.setVisible(true);
+
+} else if (window.heart === 2) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(true);
+this.heart3.setVisible(false);
+
+} else if (window.heart === 1) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(false);
+this.heart3.setVisible(false);
+
+} else if (window.heart === 0) {
+this.heart1.setVisible(false);
+this.heart2.setVisible(false);
+this.heart3.setVisible(false);
+
+}
+  
     } // end of create //
   
     update() {
@@ -128,7 +200,7 @@ class kitchen extends Phaser.Scene {
         this.player.x < 434 && 
         this.player.y > 493) {
         console.log("villagedoor");
-        this.village();
+        this.villageKitchen();
       }
 
       // //winning scene
@@ -146,6 +218,7 @@ class kitchen extends Phaser.Scene {
 
     } // end of update //
   
+    
     // hitFire(player, item) {
     //   console.log("player hit fire");
     //   this.cameras.main.shake(200);
@@ -153,9 +226,9 @@ class kitchen extends Phaser.Scene {
     //   return false;
     // }
   
-    village(player, tile) {
+    villageKitchen(player, tile) {
       console.log("village function");
-      this.scene.start("village");
+      this.scene.start("villageKitchen");
     }
 
 

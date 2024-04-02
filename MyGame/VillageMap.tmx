@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="40" height="40" tilewidth="32" tileheight="32" infinite="0" nextlayerid="10" nextobjectid="13">
  <editorsettings>
-  <export target="assets/villageMap.tmj" format="json"/>
+  <export target="assets/villageKitchen.tmj" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="Desert32x32" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="assets/Desert32x32.png" width="512" height="512"/>
@@ -39,7 +39,7 @@
   </data>
  </layer>
  <objectgroup id="5" name="objectLayer">
-  <object id="1" name="start" x="640.596" y="698.826">
+  <object id="1" name="start" x="769.442" y="594.98">
    <point/>
   </object>
   <object id="4" name="egg1" x="851.691" y="327.159">
