@@ -3,6 +3,11 @@ class village extends Phaser.Scene {
       super({ key: "village" });
     }
   
+    init(data) {
+      this.player = data.player 
+      this.inventory = data.inventory
+    }
+    
     preload() {
       // Step 1, load JSON
       this.load.tilemapTiledJSON("village", "assets/villageMap.tmj");
@@ -50,6 +55,11 @@ class village extends Phaser.Scene {
       });
 
       this.load.spritesheet("ikan", "assets/Ikan.png", {
+        frameWidth: 62,
+        frameHeight: 62,
+      });
+
+      this.load.spritesheet("nasi", "assets/NasiLemak.png", {
         frameWidth: 62,
         frameHeight: 62,
       });
@@ -316,7 +326,50 @@ class village extends Phaser.Scene {
         this
       );
 
-  
+//inventory bar
+var rect = new Phaser.Geom.Rectangle(255, 0, 300, 50);
+var graphics = this.add.graphics({ fillStyle: { color: '0x052b1d ' } });
+graphics.fillRectShape(rect).setScrollFactor(0)
+
+
+//stuff
+this.eggInv = this.add.image (400, 25, 'egg').setScrollFactor(0).setScale(0.4);
+this.cucumberInv = this.add.image (440, 25, 'cucumber').setScrollFactor(0).setScale(0.4);
+this.ikanInv = this.add.image (480, 25, 'ikan').setScrollFactor(0).setScale(0.4);
+
+this.eggNum = this.add.text(415, 20, window.egg, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
+this.cucumberNum = this.add.text(450, 20, window.cucumber, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
+this.ikanNum = this.add.text(485, 20, window.ikan, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
+
+
+
+//hearts
+this.heart1 = this.add.image (300,25,'nasi').setScrollFactor(0).setScale(0.4)
+this.heart2 = this.add.image (330,25,'nasi').setScrollFactor(0).setScale(0.4)
+this.heart3 = this.add.image (360,25,'nasi').setScrollFactor(0).setScale(0.4)
+
+if (window.heart === 3) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(true);
+this.heart3.setVisible(true);
+
+} else if (window.heart === 2) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(true);
+this.heart3.setVisible(false);
+
+} else if (window.heart === 1) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(false);
+this.heart3.setVisible(false);
+
+} else if (window.heart === 0) {
+this.heart1.setVisible(false);
+this.heart2.setVisible(false);
+this.heart3.setVisible(false);
+
+}
+
     } // end of create //
   
     update() {

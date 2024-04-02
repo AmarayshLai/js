@@ -3,6 +3,11 @@ class anchovies extends Phaser.Scene {
       super({ key: "anchovies" });
     }
   
+    init(data) {
+      this.player = data.player 
+      this.inventory = data.inventory
+    }
+
     preload() {
       // Step 1, load JSON
       this.load.tilemapTiledJSON("anchovies", "assets/anchoviesMap.tmj");
@@ -33,12 +38,16 @@ class anchovies extends Phaser.Scene {
         frameWidth: 62,
         frameHeight: 62,
       });
-
+      this.load.audio("correct", "assets/Correct.mp3");
+      this.load.audio("wrong", "assets/Wrong.mp3");
     } // end of preload //
   
     create() {
       console.log("anchovies");
   
+      this.correctSnd = this.sound.add("correct");
+      this.wrongSnd = this.sound.add("wrong");
+
       this.anims.create({
         key: "ikanAnim",
         frames: this.anims.generateFrameNumbers("ikan", { start: 0, end: 1 }),
@@ -167,6 +176,33 @@ class anchovies extends Phaser.Scene {
       .sprite(fish5.x,fish5.y, "fish")
       .play("fishAnim").setScale(0.5);
 
+      this.physics.add.overlap(
+        this.player, // player
+        [
+          this.collect1,
+          this.collect2,
+          this.collect3,
+          this.collect4,
+          this.collect5,
+        ], // item
+        this.hitIkan, // function to call
+        null,
+        this
+      );
+
+      this.physics.add.overlap(
+        this.player, // player
+        [
+          this.enemy1,
+          this.enemy2,
+          this.enemy3,
+          this.enemy4,
+          this.enemy5,
+        ], // item
+        this.hitFish, // function to call
+        null,
+        this
+      );
 
 //       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
 //       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
@@ -278,6 +314,51 @@ class anchovies extends Phaser.Scene {
         },
         this
       );
+
+      //inventory bar
+var rect = new Phaser.Geom.Rectangle(255, 0, 300, 50);
+var graphics = this.add.graphics({ fillStyle: { color: '0x052b1d ' } });
+graphics.fillRectShape(rect).setScrollFactor(0)
+
+
+//stuff
+this.eggInv = this.add.image (400, 25, 'egg').setScrollFactor(0).setScale(0.4);
+this.cucumberInv = this.add.image (440, 25, 'cucumber').setScrollFactor(0).setScale(0.4);
+this.ikanInv = this.add.image (480, 25, 'ikan').setScrollFactor(0).setScale(0.4);
+
+this.eggNum = this.add.text(415, 20, window.egg, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
+this.cucumberNum = this.add.text(450, 20, window.cucumber, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
+this.ikanNum = this.add.text(485, 20, window.ikan, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
+
+
+
+//hearts
+this.heart1 = this.add.image (300,25,'nasi').setScrollFactor(0).setScale(0.4)
+this.heart2 = this.add.image (330,25,'nasi').setScrollFactor(0).setScale(0.4)
+this.heart3 = this.add.image (360,25,'nasi').setScrollFactor(0).setScale(0.4)
+
+if (window.heart === 3) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(true);
+this.heart3.setVisible(true);
+
+} else if (window.heart === 2) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(true);
+this.heart3.setVisible(false);
+
+} else if (window.heart === 1) {
+this.heart1.setVisible(true);
+this.heart2.setVisible(false);
+this.heart3.setVisible(false);
+
+} else if (window.heart === 0) {
+this.heart1.setVisible(false);
+this.heart2.setVisible(false);
+this.heart3.setVisible(false);
+
+}
+
     } // end of create //
   
     update() {
@@ -312,7 +393,66 @@ class anchovies extends Phaser.Scene {
     //   item.disableBody(true, true); // remove fire
     //   return false;
     // }
-  
+    hitFish(player, item) {
+        console.log("player hit carrot");
+        this.wrongSnd.play()
+        this.cameras.main.shake(200);
+        window.heart--
+          console.log("***window.heart")
+        item.disableBody(true, true); // remove carrot
+        // return false;
+    
+        if (window.heart === 3) {
+          this.heart1.setVisible(true);
+          this.heart2.setVisible(true);
+          this.heart3.setVisible(true);
+        } else if (window.heart === 2) {
+          this.heart1.setVisible(true);
+          this.heart2.setVisible(true);
+          this.heart3.setVisible(false);
+        } else if (window.heart === 1) {
+          this.heart1.setVisible(true);
+          this.heart2.setVisible(false);
+          this.heart3.setVisible(false);
+        } else if (window.heart === 0) {
+          this.heart1.setVisible(false);
+          this.heart2.setVisible(false);
+          this.heart3.setVisible(false);
+        }
+    
+        if (window.heart == 0) {
+          this.scene.start("tryagain");
+          this.wrongSnd.play();
+        }
+      }
+    
+      hitCucumber(player, collectible) {
+        console.log("***collected cucumber");
+        this.correctSnd.play()
+        //disable collectible after overlap
+        collectible.disableBody(false, true);
+        window.cucumber++;
+        this.cucumberNum.setText(window.cucumber);
+      }
+    
+      hitIkan(player, collectible) {
+        console.log("***collected ikan");
+        this.correctSnd.play()
+        //disable collectible after overlap
+        collectible.disableBody(false, true);
+        window.ikan++;
+        this.ikanNum.setText(window.ikan);
+      }
+    
+      hitEgg(player, collectible) {
+        console.log("***collected egg");
+        this.correctSnd.play()
+        //disable collectible after overlap
+        collectible.disableBody(false, true);
+        window.egg++;
+        this.eggNum.setText(window.egg);
+      }
+
     village(player, tile) {
       console.log("village function");
       this.scene.start("village");

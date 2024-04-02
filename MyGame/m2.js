@@ -11,9 +11,9 @@ class m2 extends Phaser.Scene {
   }
   
   create () {
-      this.m1 = this.add.image(0, 0, 'm2').setOrigin(0, 0).setScale(1);
+      this.m2 = this.add.image(0, 0, 'm2').setOrigin(0, 0).setScale(1);
      
-      console.log("menu page - welcome");
+      console.log("menu page - grreetings");
     //   let map = this.make.tilemap({ key: "world" });
   
       var spaceDown = this.input.keyboard.addKey('SPACE');
