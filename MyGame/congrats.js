@@ -21,13 +21,13 @@ class congrats extends Phaser.Scene {
         window.ikan = 0
         window.egg = 0
         window.heart = 3;
-        
+
       var spaceDown = this.input.keyboard.addKey('SPACE');
       
       spaceDown.on('down', function(){
       console.log("Spacebar pressed, go to main menu");
       this.scene.stop("congrats");
-      this.scene.start("m1");
+      this.scene.start("m4");
       }, this );
   
   }

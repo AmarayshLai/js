@@ -11,7 +11,6 @@ class village extends Phaser.Scene {
   preload() {
     // Step 1, load JSON
     this.load.tilemapTiledJSON("village", "assets/villageMap.tmj");
-    // this.load.tilemapTiledJSON("world","assets/farmMap.tmj")
 
     // Step 2 : Preload any images here
     this.load.image("forestPng", "assets/Forest32x32.png");
@@ -154,58 +153,12 @@ class village extends Phaser.Scene {
 
     var start = map.findObject("objectLayer", (obj) => obj.name === "start");
 
+    // this.player = this.physics.add.sprite("gen");
+    // this.player = this.physics.add.sprite(637.8, 693.4, "gen");
     this.player = this.physics.add.sprite(start.x, start.y, "gen");
 
     window.player = this.player;
     this.cameras.main.startFollow(this.player);
-
-    //   this.physics.world.bound.width=this.floorLayer.width
-    //   this.physics.world.bound.height=this.floorLayer.height
-    //   this.player.setCollideWorldBounds(true);
-
-    //       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
-    //       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
-
-    //       this.enemy1 = this.physics.add
-    //         .sprite(fire1.x, fire1.y, "fire")
-    //         .play("spinfire").setScale(0.7)
-    //       this.enemy2 = this.physics.add
-    //         .sprite(fire2.x, fire2.y, "fire")
-    //         .play("spinfire").setScale(0.7);
-
-    //       this.physics.add.overlap(
-    //         this.player,
-    //         this.enemy1,
-    //         this.hitFire,
-    //         null,
-    //         this
-    //       );
-
-    //       this.physics.add.overlap(
-    //         this.player,
-    //         this.enemy2,
-    //         this.hitFire,
-    //         null,
-    //         this
-    //       );
-
-    //       this.tweens.add({
-    //         targets: this.enemy1,
-    //         y: 100,
-    //         //flipX: true,
-    //         yoyo: true,
-    //         duration: 1000,
-    //         repeat: -1
-    //     })
-
-    //     this.tweens.add({
-    //       targets: this.enemy2,
-    //       y: 400,
-    //       //flipX: true,
-    //       yoyo: true,
-    //       duration: 1000,
-    //       repeat: -1
-    //   })
 
     this.buildingsLayer.setCollisionByExclusion(-1, true);
     this.physics.add.collider(this.player, this.buildingsLayer);
@@ -279,39 +232,7 @@ class village extends Phaser.Scene {
     // create the arrow keys
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    // var level3Down = this.input.keyboard.addKey("3");
-
-    // rDown.on(
-    //   "down",
-    //   function () {
-    //     console.log("R pressed (reload game)");
-    //     this.scene.start("gameScene");
-    //   },
-    //   this
-    // );
-
-    // aDown.on(
-    //   "down",
-    //   function () {
-    //     console.log("A pressed (main menu)");
-    //     this.scene.start("preloadScene");
-    //   },
-    //   this
-    // );
-
-    // var level2Down = this.input.keyboard.addKey(50);
-
-    // level2Down.on(
-    //   "down",
-    //   function () {
-    //     console.log("2 pressed, jump to level 2");
-    //     this.scene.start("level2");
-    //   },
-    //   this
-    // );
-
-    // make the camera follow the player
-    // this.cameras.main.startFollow(this.player);
+    
 
     var level1Down = this.input.keyboard.addKey(49);
 
@@ -457,50 +378,9 @@ class village extends Phaser.Scene {
     }
   }
 
-//  //winning scene
-//       // if (this.player.x > 914 && this.player .x < 994 && this.player.y > 1079 && this.player.y < 1114) {
-//       //   //console.log("home location")
-//       console.log(window.cucumber, window.egg, window.ikan)
-//       if (window.cucumber > 4, window.egg >4, window.ikan >4) {
-//         console.log("jumping to winning scene")
-//         this.scene.start("congrats")
-//       } else {
-//         this.scene.start("village")
-
-//       }
-
-
-  //   //winning scene
-  //   if (
-  //     this.player.x > 914 &&
-  //     this.player.x < 994 &&
-  //     this.player.y > 1079 &&
-  //     this.player.y < 1114
-  //   ) {
-  //     //console.log("home location")
-  //     console.log(window.cucumber, window.egg, window.ikan)
-  // if (window.cucumber > 4, window.egg >4, window.ikan >4) {
-  //       console.log("jumping to winning scene");
-  //       this.scene.start("congrats");
-  //     }
-  //   }
   }
 
 
-  //   this.scene.start("congrats")
-  // } else {
-  //   this.scene.start("village")
-
-  // }
-
-  // end of update //
-
-  // hitFire(player, item) {
-  //   console.log("player hit fire");
-  //   this.cameras.main.shake(200);
-  //   item.disableBody(true, true); // remove fire
-  //   return false;
-  // }
 
   kitchen(player, tile) {
     console.log("kitchen function");

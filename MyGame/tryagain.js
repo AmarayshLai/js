@@ -28,7 +28,7 @@ class tryagain extends Phaser.Scene {
       spaceDown.on('down', function(){
       console.log("Spacebar pressed, go to main menu");
       this.scene.stop("tryagain");
-      this.scene.start("m1");
+      this.scene.start("village");
       }, this );
   
   

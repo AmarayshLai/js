@@ -6,7 +6,6 @@ class kitchen extends Phaser.Scene {
     preload() {
       // Step 1, load JSON
       this.load.tilemapTiledJSON("kitchen", "assets/kitchenMapNew.tmj");
-      // this.load.tilemapTiledJSON("world","assets/farmMap.tmj")
   
       // Step 2 : Preload any images here
       this.load.image("forestPng", "assets/Forest32x32.png");
@@ -27,13 +26,6 @@ class kitchen extends Phaser.Scene {
   
     create() {
       console.log("kitchen");
-  
-    //   this.anims.create({
-    //     key: "spinfire",
-    //     frames: this.anims.generateFrameNumbers("fire", { start: 0, end: 5 }),
-    //     frameRate: 10,
-    //     repeat: -1,
-    //   });
   
       //Step 3 - Create the map from main
       let map = this.make.tilemap({ key: "kitchen" });
@@ -57,6 +49,7 @@ class kitchen extends Phaser.Scene {
       ];
   
       // Step 6  Load in layers by layers
+      this.collideLayer = map.createLayer("collideLayer", tilesArray, 0, 0);
       this.baseLayer = map.createLayer("baseLayer", tilesArray, 0, 0);
       this.floorLayer = map.createLayer("floorLayer", tilesArray, 0, 0);
       this.kitchenLayer = map.createLayer("kitchenLayer", tilesArray, 0, 0);
@@ -96,50 +89,9 @@ class kitchen extends Phaser.Scene {
       this.player = this.physics.add.sprite(start.x, start.y, "gen");
       window.player = this.player;
   
-//       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
-//       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
-  
-//       this.enemy1 = this.physics.add
-//         .sprite(fire1.x, fire1.y, "fire")
-//         .play("spinfire").setScale(0.7)
-//       this.enemy2 = this.physics.add
-//         .sprite(fire2.x, fire2.y, "fire")
-//         .play("spinfire").setScale(0.7);
-  
-//       this.physics.add.overlap(
-//         this.player,
-//         this.enemy1,
-//         this.hitFire,
-//         null,
-//         this
-//       );
-  
-//       this.physics.add.overlap(
-//         this.player,
-//         this.enemy2,
-//         this.hitFire,
-//         null,
-//         this
-//       );
-  
-//       this.tweens.add({
-//         targets: this.enemy1,
-//         y: 100,
-//         //flipX: true,
-//         yoyo: true,
-//         duration: 1000,
-//         repeat: -1
-//     })
-  
-//     this.tweens.add({
-//       targets: this.enemy2,
-//       y: 400,
-//       //flipX: true,
-//       yoyo: true,
-//       duration: 1000,
-//       repeat: -1
-//   })
-  
+      this.collideLayer.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.player, this.collideLayer);
+      
       this.kitchenLayer.setCollisionByExclusion(-1, true);
       this.physics.add.collider(this.player, this.kitchenLayer);
   
@@ -151,61 +103,7 @@ class kitchen extends Phaser.Scene {
       // create the arrow keys
       this.cursors = this.input.keyboard.createCursorKeys();
   
-      // var level3Down = this.input.keyboard.addKey("3");
-  
-      // rDown.on(
-      //   "down",
-      //   function () {
-      //     console.log("R pressed (reload game)");
-      //     this.scene.start("gameScene");
-      //   },
-      //   this
-      // );
-  
-      // aDown.on(
-      //   "down",
-      //   function () {
-      //     console.log("A pressed (main menu)");
-      //     this.scene.start("preloadScene");
-      //   },
-      //   this
-      // );
-  
-      // var level2Down = this.input.keyboard.addKey(50);
-  
-      // level2Down.on(
-      //   "down",
-      //   function () {
-      //     console.log("2 pressed, jump to level 2");
-      //     this.scene.start("level2");
-      //   },
-      //   this
-      // );
-  
-      // make the camera follow the player
-      // this.cameras.main.startFollow(this.player);
-  
-      var level1Down = this.input.keyboard.addKey(49);
-  
-      level1Down.on(
-        "down",
-        function () {
-          console.log("1 pressed, jump to level 1");
-          this.scene.start("level1");
-        },
-        this
-      );
-  
-      var level2Down = this.input.keyboard.addKey(50);
-  
-      level2Down.on(
-        "down",
-        function () {
-          console.log("2 pressed, jump to level 2");
-          this.scene.start("level2");
-        },
-        this
-      );
+
     } // end of create //
   
     update() {

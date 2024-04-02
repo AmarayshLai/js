@@ -5,13 +5,12 @@ class cucumber extends Phaser.Scene {
 
   init(data) {
     this.player = data.player;
-    // this.inventory = data.inventory;
+    this.inventory = data.inventory;
   }
 
   preload() {
     // Step 1, load JSON
     this.load.tilemapTiledJSON("cucumber", "assets/cucumberMap.tmj");
-    // this.load.tilemapTiledJSON("world","assets/farmMap.tmj")
 
     // Step 2 : Preload any images here
     this.load.image("forestPng", "assets/Forest32x32.png");
@@ -64,13 +63,7 @@ class cucumber extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    //   this.anims.create({
-    //     key: "spinfire",
-    //     frames: this.anims.generateFrameNumbers("fire", { start: 0, end: 5 }),
-    //     frameRate: 10,
-    //     repeat: -1,
-    //   });
-
+  
     //Step 3 - Create the map from main
     let map = this.make.tilemap({ key: "cucumber" });
 
@@ -253,156 +246,16 @@ class cucumber extends Phaser.Scene {
         this
       );
 
-    // this.physics.add.overlap(
-    //   this.player,
-    //   this.enemy1,
-    //   this.hitCarrot,
-    //   null,
-    //   this
-    // );
 
-    // this.physics.add.overlap(
-    //   this.player,
-    //   this.enemy2,
-    //   this.hitCarrot,
-    //   null,
-    //   this
-    // );
-
-    // this.physics.add.overlap(
-    //   this.player,
-    //   this.enemy3,
-    //   this.hitCarrot,
-    //   null,
-    //   this
-    // );
-
-    // this.physics.add.overlap(
-    //   this.player,
-    //   this.enemy4,
-    //   this.hitCarrot,
-    //   null,
-    //   this
-    // );
-
-    // this.physics.add.overlap(
-    //   this.player,
-    //   this.enemy5,
-    //   this.hitCarrot,
-    //   null,
-    //   this
-    // );
-
-    //       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
-    //       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
-
-    //       this.enemy1 = this.physics.add
-    //         .sprite(fire1.x, fire1.y, "fire")
-    //         .play("spinfire").setScale(0.7)
-    //       this.enemy2 = this.physics.add
-    //         .sprite(fire2.x, fire2.y, "fire")
-    //         .play("spinfire").setScale(0.7);
-
-    //       this.physics.add.overlap(
-    //         this.player,
-    //         this.enemy1,
-    //         this.hitFire,
-    //         null,
-    //         this
-    //       );
-
-    //       this.physics.add.overlap(
-    //         this.player,
-    //         this.enemy2,
-    //         this.hitFire,
-    //         null,
-    //         this
-    //       );
-
-    //       this.tweens.add({
-    //         targets: this.enemy1,
-    //         y: 100,
-    //         //flipX: true,
-    //         yoyo: true,
-    //         duration: 1000,
-    //         repeat: -1
-    //     })
-
-    //     this.tweens.add({
-    //       targets: this.enemy2,
-    //       y: 400,
-    //       //flipX: true,
-    //       yoyo: true,
-    //       duration: 1000,
-    //       repeat: -1
-    //   })
-
-    //   this.kitchenLayer.setCollisionByExclusion(-1, true);
-    //   this.physics.add.collider(this.player, this.kitchenLayer);
-
-    //   this.equipmentLayer.setCollisionByExclusion(-1, true);
-    //   this.physics.add.collider(this.player, this.equipmentLayer);
+      this.floorLayer.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.player, this.floorLayer);
 
     this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6);
 
     // create the arrow keys
     this.cursors = this.input.keyboard.createCursorKeys();
 
-    // var level3Down = this.input.keyboard.addKey("3");
 
-    // rDown.on(
-    //   "down",
-    //   function () {
-    //     console.log("R pressed (reload game)");
-    //     this.scene.start("gameScene");
-    //   },
-    //   this
-    // );
-
-    // aDown.on(
-    //   "down",
-    //   function () {
-    //     console.log("A pressed (main menu)");
-    //     this.scene.start("preloadScene");
-    //   },
-    //   this
-    // );
-
-    // var level2Down = this.input.keyboard.addKey(50);
-
-    // level2Down.on(
-    //   "down",
-    //   function () {
-    //     console.log("2 pressed, jump to level 2");
-    //     this.scene.start("level2");
-    //   },
-    //   this
-    // );
-
-    // make the camera follow the player
-    // this.cameras.main.startFollow(this.player);
-
-    var level1Down = this.input.keyboard.addKey(49);
-
-    level1Down.on(
-      "down",
-      function () {
-        console.log("1 pressed, jump to level 1");
-        this.scene.start("level1");
-      },
-      this
-    );
-
-    var level2Down = this.input.keyboard.addKey(50);
-
-    level2Down.on(
-      "down",
-      function () {
-        console.log("2 pressed, jump to level 2");
-        this.scene.start("level2");
-      },
-      this
-    );
     //inventory bar
 var rect = new Phaser.Geom.Rectangle(255, 0, 300, 50);
 var graphics = this.add.graphics({ fillStyle: { color: '0x052b1d ' } });
@@ -475,12 +328,7 @@ this.heart3.setVisible(false);
     }
   } // end of update //
 
-  // hitFire(player, item) {
-  //   console.log("player hit fire");
-  //   this.cameras.main.shake(200);
-  //   item.disableBody(true, true); // remove fire
-  //   return false;
-  // }
+
 
   hitCarrot(player, item) {
     console.log("player hit carrot");
@@ -547,19 +395,5 @@ this.heart3.setVisible(false);
     this.scene.start("village");
   }
 
-  // updateInventory() {
-  //   console.log("*** updateInventory()");
-  //   // Emit events showInventory
-  //   this.inventory = {};
-  //   this.inventory.cucumber = window.cucumber;
-  //   this.inventory.ikan = window.ikan;
-  //   this.inventory.egg = window.egg;
-  //   this.inventory.heart = window.heart;
-
-  //   console.log("*** updateInventory() Emit event", this.inventory);
-  //   this.invEvent = (event, data) => {
-  //     this.scene.get("inventory").events.emit(event, data);
-  //   };
-  //   this.invEvent("inventory", this.inventory);
-  // }
+  
 }

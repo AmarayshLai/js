@@ -11,7 +11,6 @@ class anchovies extends Phaser.Scene {
     preload() {
       // Step 1, load JSON
       this.load.tilemapTiledJSON("anchovies", "assets/anchoviesMap.tmj");
-      // this.load.tilemapTiledJSON("world","assets/farmMap.tmj")
   
       // Step 2 : Preload any images here
       this.load.image("forestPng", "assets/Forest32x32.png");
@@ -85,9 +84,8 @@ class anchovies extends Phaser.Scene {
   
       // Step 6  Load in layers by layers
       this.baseLayer = map.createLayer("baseLayer", tilesArray, 0, 0);
+      this.collideLayer = map.createLayer("collideLayer", tilesArray, 0, 0);
       this.floorLayer = map.createLayer("floorLayer", tilesArray, 0, 0);
-    //   this.kitchenLayer = map.createLayer("kitchenLayer", tilesArray, 0, 0);
-    //   this.equipmentLayer = map.createLayer("equipmentLayer", tilesArray, 0, 0);
       this.objectLayer = map.createLayer("objectLayer", tilesArray, 0, 0);
   
       this.anims.create({
@@ -203,117 +201,14 @@ class anchovies extends Phaser.Scene {
         null,
         this
       );
-
-//       var fire1 = map.findObject("objectLayer", (obj) => obj.name === "fire1");
-//       var fire2 = map.findObject("objectLayer", (obj) => obj.name === "fire2");
   
-//       this.enemy1 = this.physics.add
-//         .sprite(fire1.x, fire1.y, "fire")
-//         .play("spinfire").setScale(0.7)
-//       this.enemy2 = this.physics.add
-//         .sprite(fire2.x, fire2.y, "fire")
-//         .play("spinfire").setScale(0.7);
-  
-//       this.physics.add.overlap(
-//         this.player,
-//         this.enemy1,
-//         this.hitFire,
-//         null,
-//         this
-//       );
-  
-//       this.physics.add.overlap(
-//         this.player,
-//         this.enemy2,
-//         this.hitFire,
-//         null,
-//         this
-//       );
-  
-//       this.tweens.add({
-//         targets: this.enemy1,
-//         y: 100,
-//         //flipX: true,
-//         yoyo: true,
-//         duration: 1000,
-//         repeat: -1
-//     })
-  
-//     this.tweens.add({
-//       targets: this.enemy2,
-//       y: 400,
-//       //flipX: true,
-//       yoyo: true,
-//       duration: 1000,
-//       repeat: -1
-//   })
-  
-      // this.kitchenLayer.setCollisionByExclusion(-1, true);
-      // this.physics.add.collider(this.player, this.kitchenLayer);
-  
-      // this.equipmentLayer.setCollisionByExclusion(-1, true);
-      // this.physics.add.collider(this.player, this.equipmentLayer);
+      this.collideLayer.setCollisionByExclusion(-1, true);
+      this.physics.add.collider(this.player, this.collideLayer);
   
       this.player.body.setSize(this.player.width * 0.4, this.player.height * 0.6);
   
       // create the arrow keys
       this.cursors = this.input.keyboard.createCursorKeys();
-  
-      // var level3Down = this.input.keyboard.addKey("3");
-  
-      // rDown.on(
-      //   "down",
-      //   function () {
-      //     console.log("R pressed (reload game)");
-      //     this.scene.start("gameScene");
-      //   },
-      //   this
-      // );
-  
-      // aDown.on(
-      //   "down",
-      //   function () {
-      //     console.log("A pressed (main menu)");
-      //     this.scene.start("preloadScene");
-      //   },
-      //   this
-      // );
-  
-      // var level2Down = this.input.keyboard.addKey(50);
-  
-      // level2Down.on(
-      //   "down",
-      //   function () {
-      //     console.log("2 pressed, jump to level 2");
-      //     this.scene.start("level2");
-      //   },
-      //   this
-      // );
-  
-      // make the camera follow the player
-      // this.cameras.main.startFollow(this.player);
-  
-      var level1Down = this.input.keyboard.addKey(49);
-  
-      level1Down.on(
-        "down",
-        function () {
-          console.log("1 pressed, jump to level 1");
-          this.scene.start("level1");
-        },
-        this
-      );
-  
-      var level2Down = this.input.keyboard.addKey(50);
-  
-      level2Down.on(
-        "down",
-        function () {
-          console.log("2 pressed, jump to level 2");
-          this.scene.start("level2");
-        },
-        this
-      );
 
       //inventory bar
 var rect = new Phaser.Geom.Rectangle(255, 0, 300, 50);
@@ -329,7 +224,6 @@ this.ikanInv = this.add.image (480, 25, 'ikan').setScrollFactor(0).setScale(0.4)
 this.eggNum = this.add.text(415, 20, window.egg, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
 this.cucumberNum = this.add.text(450, 20, window.cucumber, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
 this.ikanNum = this.add.text(485, 20, window.ikan, {font: '15px Futura PT Medium', fill: '#ffffff'}).setScrollFactor(0);
-
 
 
 //hearts
@@ -386,13 +280,7 @@ this.heart3.setVisible(false);
         this.village();
       }
     } // end of update //
-  
-    // hitFire(player, item) {
-    //   console.log("player hit fire");
-    //   this.cameras.main.shake(200);
-    //   item.disableBody(true, true); // remove fire
-    //   return false;
-    // }
+
     hitFish(player, item) {
         console.log("player hit carrot");
         this.wrongSnd.play()
